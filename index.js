@@ -15,10 +15,31 @@ var op1 = {
   operation: '+',
   result: 4
 };
+
+const { num1, operation, num2, result } = op1;
+
 var computeOperator = {
   '+': function (x, y) { return x + y },
   '-': function (x, y) { return x - y }
 }
+
+
+const getResult = () => {
+  switch (operation) {
+    case '+':
+      return num1 + num2
+      break;
+
+    case '-':
+      return num1 - num2
+      break;
+
+    default:
+      return num1 + num2
+      break;
+  }
+}
+// const getResult = computeOperator[operation](num1, num2);
 
 const createMisleadingResult = trueResult => {
   // gets a int and generate a random number that is either +1 or -2 than this
@@ -32,9 +53,6 @@ const createMisleadingResult = trueResult => {
   let misleadingResult = Math.floor(Math.random() * (max - min + 1)) + min;
 
   if (misleadingResult === trueResult) {
-    // if is the same, just increase it by 1
-    console.log("si");
-    console.log(misleadingResult);
     return misleadingResult + 1;
 
   }
@@ -42,8 +60,8 @@ const createMisleadingResult = trueResult => {
   // return Math.floor(Math.random() * trueResult + 1) + errorRange;
 };
 
-const { num1, operation, num2, result } = op1;
-const getResult = computeOperator['+'](num1, num2);
+const bothResults = [getResult(), createMisleadingResult(result)]
+
 
 window.addEventListener('DOMContentLoaded', (e) => {
 
@@ -53,9 +71,37 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const resultDiv = document.body.querySelector('#result');
 
   num1Div.innerHTML = num1;
-  operationDiv.innerHTML = operation;
+  operationDiv.innerHTML = operation
   num2Div.innerHTML = num2;
-  resultDiv.innerHTML = createMisleadingResult(result);
+  resultDiv.innerHTML = getResult();
+  resultDiv.innerHTML = bothResults[Math.floor(Math.random() * bothResults.length)];
+  // resultDiv.innerHTML = createMisleadingResult(result);
+
+
+  const handleInput = event => {
+    switch (event.keyCode) {
+      // User states answer is right (right key pressed)
+      case 37:
+        console.log("Left");
+        break;
+      case 39:
+        console.log("Right");
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  document.addEventListener('keydown', handleInput);
+
+  // document.addEventListener('keyDown', control);
+  if (parseInt(resultDiv.innerHTML) === getResult()) {
+    console.log("Displaying true result")
+  } else {
+    // showing deceive result
+    console.log("Displaying deceptive result")
+  }
 
 
 });
