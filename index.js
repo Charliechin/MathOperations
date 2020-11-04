@@ -60,7 +60,13 @@ const createMisleadingResult = trueResult => {
   // return Math.floor(Math.random() * trueResult + 1) + errorRange;
 };
 
-const bothResults = [getResult(), createMisleadingResult(result)]
+const bothResults = [getResult(), createMisleadingResult(result)];
+// Think of changing the name of 'resultChosen'. this is a random selection
+// this will randomly display either the real result or the deceptive result 
+const resultChosen = bothResults[Math.floor(Math.random() * bothResults.length)];
+let userInput = false;
+
+let isCorrect = false;
 
 
 window.addEventListener('DOMContentLoaded', (e) => {
@@ -70,38 +76,52 @@ window.addEventListener('DOMContentLoaded', (e) => {
   const num2Div = document.body.querySelector('#num2');
   const resultDiv = document.body.querySelector('#result');
 
+
+
   num1Div.innerHTML = num1;
   operationDiv.innerHTML = operation
   num2Div.innerHTML = num2;
   resultDiv.innerHTML = getResult();
-  resultDiv.innerHTML = bothResults[Math.floor(Math.random() * bothResults.length)];
+  resultDiv.innerHTML = resultChosen;
   // resultDiv.innerHTML = createMisleadingResult(result);
+
+  if (parseInt(resultDiv.innerHTML) === getResult()) {
+    isCorrect = true;
+  } else {
+    // showing deceive result
+    isCorrect = false;
+  }
 
 
   const handleInput = event => {
     switch (event.keyCode) {
-      // User states answer is right (right key pressed)
+      // Stores userInput, left means false, right means true
       case 37:
         console.log("Left");
+        userInput = false;
         break;
       case 39:
         console.log("Right");
+        userInput = true;
         break;
 
       default:
+        return;
         break;
+    };
+    if (userInput === isCorrect) {
+      console.log("Score!");
+    } else {
+      console.log("Oh noes!");
     }
+
+
   }
 
   document.addEventListener('keydown', handleInput);
 
   // document.addEventListener('keyDown', control);
-  if (parseInt(resultDiv.innerHTML) === getResult()) {
-    console.log("Displaying true result")
-  } else {
-    // showing deceive result
-    console.log("Displaying deceptive result")
-  }
+
 
 
 });
