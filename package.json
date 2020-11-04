@@ -4,7 +4,8 @@
   "description": "A game where you have to quickly answer simply math operations",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r esm index.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/Charliechin/MathOperations/issues"
   },
-  "homepage": "https://github.com/Charliechin/MathOperations#readme"
+  "homepage": "https://github.com/Charliechin/MathOperations#readme",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
 }
