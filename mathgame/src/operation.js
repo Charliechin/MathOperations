@@ -20,7 +20,7 @@ class Operation {
   };
 
   get misleadingResult() {
-    const errorRange = 8;
+    const errorRange = 1;
     const min = Math.ceil(this.result - errorRange);
     const max = Math.floor(this.result + errorRange);
 
