@@ -1,31 +1,3 @@
-// const Operation = (num1, operator, num2) => {
-
-//   result = () => {
-//     switch (operator) {
-//       case '+':
-//         return num1 + num2
-//         break;
-
-//       case '-':
-//         return num1 - num2
-//         break;
-
-//       default:
-//         return num1 + num2
-//         break;
-//     }
-//   };
-
-//   return ({
-//     num1,
-//     operator,
-//     num2,
-//     result: result()
-//   })
-
-// }
-
-// export default Operation;
 
 class Operation {
   constructor(num1, operator, num2) {
@@ -38,18 +10,60 @@ class Operation {
     switch (this.operator) {
       case '+':
         return this.num1 + this.num2
-        break;
 
       case '-':
         return this.num1 - this.num2
-        break;
 
       default:
         return this.num1 + this.num2
-        break;
     }
   };
+
+  get misleadingResult() {
+    const errorRange = 8;
+    const min = Math.ceil(this.result - errorRange);
+    const max = Math.floor(this.result + errorRange);
+
+    let misleadingResult = Math.floor(Math.random() * (max - min + 1)) + min;
+    if (misleadingResult === this.result) {
+      console.log("Creating misleading result, it created a random number that is the same as the true result");
+      return misleadingResult + errorRange;
+
+    }
+    return misleadingResult;
+
+  }
 }
+
+
+
+
+
+//   const getRandomNum = num => {
+//     return Math.floor(Math.random() * num);
+//   }
+
+
+//   const createMisleadingResult = result => {
+//     // Increase this to make the game harder
+//     const errorRange = 2;
+//     const min = Math.ceil(result - errorRange);
+//     const max = Math.floor(result + errorRange);
+//     let misleadingResult = Math.floor(Math.random() * (max - min + 1)) + min;
+//     if (misleadingResult === result) {
+//       return misleadingResult + 1;
+
+//     }
+//     return misleadingResult;
+//   };
+
+
+
+
+
+
+
+
 
 export default Operation;
 
