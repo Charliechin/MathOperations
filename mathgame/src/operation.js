@@ -34,7 +34,7 @@ class Operation {
     this.num2 = num2;
   }
 
-  get calcResult() {
+  get result() {
     switch (this.operator) {
       case '+':
         return this.num1 + this.num2
