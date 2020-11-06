@@ -6,38 +6,80 @@ const Game = () => {
 
   const [operation, setOperation] = useState(new Operation(2, '+', 2))
   const [results, setResults] = useState([operation.result, operation.misleadingResult])
+  // const [resultDisplay, setResultDisplay] = useState(results[0]);
   const [resultDisplay, setResultDisplay] = useState(results[Math.floor(Math.random() * 2)]);
 
   const [score, setScore] = useState(0);
 
   // useEffect(() => console.log(muchi));
 
+  // useEffect(() => {
+
+  //   // if (operation.result === resultDisplay) {
+  //   //   console.log("this equation is true");
+  //   // } else {
+  //   //   console.log("this equation is false");
+  //   // }
+
+  //   // Check when is this seting the resultDisplay
+  //   setResults(() => ([operation.result, operation.misleadingResult]))
+  //   setResultDisplay((resDisplayed) => [results[Math.floor(Math.random() * 2)]]);
+
+  // }, [operation]);
+
+
   useEffect(() => {
-
-    if (operation.result === resultDisplay) {
-      console.log("this equation is true");
-    } else {
-      console.log("this equation is false");
-    }
-
-
-    setResults(() => ([operation.result, operation.misleadingResult]))
-    setResultDisplay(() => results[Math.floor(Math.random() * 2)]);
-    console.log("Cuenta cambiada");
-    console.log(results);
-    console.log(operation);
-
-  }, [operation, setResults, setResultDisplay]);
+    // setResultDisplay(() => results[Math.floor(Math.random() * 2)]);
+    console.log((`${operation.num1}  ${operation.operator}  ${operation.num2} = T:${operation.result},F:${operation.misleadingResult}`));
+  }, [results, operation])
 
 
   useKeypress('ArrowLeft', () => {
-    console.clear();
-    console.log("<-");
-    setScore(score => score + 1);
+    // console.clear();
 
-    setOperation(new Operation(Math.floor(Math.random() * 6), '+', Math.floor(Math.random() * 6)))
+    console.log("<-");
+
+
+    if (operation.result === resultDisplay) {
+      setScore(score => score - 1);
+      console.log("this equation is true");
+    } else {
+      setScore(score => score + 1);
+      console.log("this equation is false");
+    }
+
+    // setOperation(new Operation(Math.floor(Math.random() * 6), '+', Math.floor(Math.random() * 6)))
 
   });
+
+
+  useEffect(() => {
+    console.log("Ostia, ha cambiado, Marchando una nueva operacion");
+    setOperation(new Operation(Math.floor(Math.random() * 6), '+', Math.floor(Math.random() * 6)))
+    setResults(() => ([operation.result, operation.misleadingResult]))
+    setResultDisplay((resDisplayed) => [results[Math.floor(Math.random() * 2)]]);
+  }, [score])
+
+
+  useKeypress('ArrowRight', () => {
+    // console.clear();
+
+    console.log("->");
+
+
+    if (operation.result === resultDisplay) {
+      setScore(score => score + 1);
+      console.log("this equation is true");
+    } else {
+      setScore(score => score - 1);
+      console.log("this equation is false");
+    }
+
+    // setOperation(new Operation(Math.floor(Math.random() * 6), '+', Math.floor(Math.random() * 6)))
+
+  });
+
+
 
 
 
